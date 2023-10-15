@@ -40,7 +40,7 @@
             this.ContactsChooseCopy = new System.Windows.Forms.ListBox();
             this.Files = new System.Windows.Forms.Label();
             this.listBox2 = new System.Windows.Forms.ListBox();
-            this.listBox3 = new System.Windows.Forms.ListBox();
+            this.fileCopies = new System.Windows.Forms.ListBox();
             this.ChooseBtn = new System.Windows.Forms.Button();
             this.AddBtn = new System.Windows.Forms.Button();
             this.ClearBtn = new System.Windows.Forms.Button();
@@ -152,14 +152,14 @@
             this.listBox2.Size = new System.Drawing.Size(227, 84);
             this.listBox2.TabIndex = 11;
             // 
-            // listBox3
+            // fileCopies
             // 
-            this.listBox3.FormattingEnabled = true;
-            this.listBox3.ItemHeight = 16;
-            this.listBox3.Location = new System.Drawing.Point(561, 228);
-            this.listBox3.Name = "listBox3";
-            this.listBox3.Size = new System.Drawing.Size(227, 84);
-            this.listBox3.TabIndex = 12;
+            this.fileCopies.FormattingEnabled = true;
+            this.fileCopies.ItemHeight = 16;
+            this.fileCopies.Location = new System.Drawing.Point(561, 228);
+            this.fileCopies.Name = "fileCopies";
+            this.fileCopies.Size = new System.Drawing.Size(227, 84);
+            this.fileCopies.TabIndex = 12;
             // 
             // ChooseBtn
             // 
@@ -169,6 +169,7 @@
             this.ChooseBtn.TabIndex = 13;
             this.ChooseBtn.Text = "ChooseBtn";
             this.ChooseBtn.UseVisualStyleBackColor = true;
+            this.ChooseBtn.Click += new System.EventHandler(this.ChooseBtn_Click);
             // 
             // AddBtn
             // 
@@ -207,7 +208,7 @@
             this.Controls.Add(this.SendBtn);
             this.Controls.Add(this.AddBtn);
             this.Controls.Add(this.ChooseBtn);
-            this.Controls.Add(this.listBox3);
+            this.Controls.Add(this.fileCopies);
             this.Controls.Add(this.listBox2);
             this.Controls.Add(this.Files);
             this.Controls.Add(this.ContactsChooseCopy);
@@ -242,7 +243,7 @@
         private System.Windows.Forms.ListBox ContactsChooseCopy;
         private System.Windows.Forms.Label Files;
         private System.Windows.Forms.ListBox listBox2;
-        private System.Windows.Forms.ListBox listBox3;
+        private System.Windows.Forms.ListBox fileCopies;
         private System.Windows.Forms.Button ChooseBtn;
         private System.Windows.Forms.Button AddBtn;
         private System.Windows.Forms.Button ClearBtn;

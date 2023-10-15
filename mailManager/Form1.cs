@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
+using System.Net.Mime;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -78,6 +80,26 @@ namespace mailManager
                 message.Subject = Subject;
                 message.Body = Body;
 
+
+                List<string> fileList = new List<string>();
+                // Создаем массив путей к файлам, которые нужно прикрепить
+                foreach (var FileStringPath in fileCopies.Items)
+                {
+                    fileList.Add(FileStringPath.ToString());
+                }
+
+                foreach (string filePath in fileList)
+                {
+                    Attachment attachment = new Attachment(filePath, MediaTypeNames.Application.Octet);
+                    ContentDisposition disposition = attachment.ContentDisposition;
+                    disposition.CreationDate = File.GetCreationTime(filePath);
+                    disposition.ModificationDate = File.GetLastWriteTime(filePath);
+                    disposition.ReadDate = File.GetLastAccessTime(filePath);
+                    message.Attachments.Add(attachment);
+                }
+
+
+
                 int port = 2525;
                 string host = "sandbox.smtp.mailtrap.io";
                 string login = "68c6cb0edd6ba4";
@@ -87,7 +109,29 @@ namespace mailManager
                 smtpClient.Credentials = new NetworkCredential(login, password);
 
                 smtpClient.Send(message);
+
+                // Очищаем список вложений после отправки сообщения
+                message.Attachments.Clear();
+            }
+        }
+
+        private void ChooseBtn_Click(object sender, EventArgs e)
+        {
+            // Создаем объект OpenFileDialog
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                Multiselect = true,
+                Title = "Выберите файлы для отправки"
+            };
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                // Прикрепляем выбранные файлы к письму
+                foreach (string filePath in openFileDialog.FileNames)
+                {
+                    fileCopies.Items.Add(filePath);
+                }
+            }
             }
         }
     }
-}
